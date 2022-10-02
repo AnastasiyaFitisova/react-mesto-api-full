@@ -1,0 +1,24 @@
+.profile__set-button {
+    width: 24px;
+    height: 24px;
+    margin-top: 15px;
+    border: 1px solid #FFFFFF;
+    background-color: black;
+    background-image: url(../../../images/profile/Set-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-image 0.3s;
+}
+
+.profile__set-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__set-button {
+        width: 18px;
+        height: 18px;
+        margin-top: 0;
+    }
+}

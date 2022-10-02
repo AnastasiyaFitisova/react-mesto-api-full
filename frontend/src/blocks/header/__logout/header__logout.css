@@ -1,0 +1,24 @@
+.header__logout {
+  padding-top: 45px;
+  margin-bottom: 51px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #A9A9A9;
+  text-decoration: none;
+}
+
+.header__logout {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+  .header__logout {
+      padding-top: 28px;
+      margin-bottom: 26px;
+      margin-right: 27px;
+  }
+}
