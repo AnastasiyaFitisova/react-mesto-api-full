@@ -7,7 +7,7 @@ const InternalServerError = require('../errors/InternalServerError');
 
 const createCard = async (req, res, next) => {
   try {
-    const owner = req.user._id;
+    const owner = req.users._id;
     const { name, link } = req.body;
     const card = await new Card({ owner, name, link }).save();
     return res.status(200).send(card);
@@ -30,7 +30,7 @@ const getCards = async (req, res, next) => {
 
 const deleteCard = async (req, res, next) => {
   const { cardId } = req.params;
-  const userId = req.user._id;
+  const userId = req.users._id;
   try {
     const card = await Card.findById(cardId);
     if (!card) {
@@ -53,7 +53,7 @@ const putLike = async (req, res, next) => {
     const { cardId } = req.params;
     const like = await Card.findByIdAndUpdate(
       cardId,
-      { $addToSet: { likes: req.user._id } },
+      { $addToSet: { likes: req.users._id } },
       { new: true, runValidators: true },
     );
     if (!like) {
@@ -73,7 +73,7 @@ const deleteLike = async (req, res, next) => {
     const { cardId } = req.params;
     const delLike = await Card.findByIdAndUpdate(
       cardId,
-      { $pull: { likes: req.user._id } },
+      { $pull: { likes: req.users._id } },
       { new: true, runValidators: true },
     );
     if (!delLike) {

@@ -35,3 +35,14 @@ export const authorize = ({ email, password }) => {
       return checkResult(res);
     });
 };
+
+export const logout = () => {
+  return fetch(`${url}/logout`, {
+    method: 'GET',
+    headers,
+    credentials: 'include',
+  })
+    .then((res) => {
+      return checkResult(res);
+    });
+};

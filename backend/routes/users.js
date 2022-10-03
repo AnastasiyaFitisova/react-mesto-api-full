@@ -2,12 +2,16 @@ const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 
 const {
-  getUsers, getUserById, updateProfile, updateAvatar, getUserInfo,
+  getUsers, getUserById, updateProfile, updateAvatar, getUserInfo, logout,
 } = require('../controllers/users');
 
 const userRoutes = express.Router();
 
+userRoutes.get('/logout', express.json(), logout);
+
 userRoutes.get('/', getUsers); // возвращает всех пользователей
+
+userRoutes.get('/me', getUserInfo); // возвращает информацию о текущем пользователе
 
 userRoutes.get('/:userId', celebrate({
   params: Joi.object().keys({
@@ -27,8 +31,6 @@ userRoutes.patch('/me/avatar', celebrate({
     avatar: Joi.string().required().regex(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/),
   }),
 }), updateAvatar); // обновляет аватар
-
-userRoutes.get('/me', getUserInfo); // возвращает информацию о текущем пользователе
 
 module.exports = {
   userRoutes,

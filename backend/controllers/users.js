@@ -58,7 +58,7 @@ const getUserById = async (req, res, next) => {
 const updateProfile = async (req, res, next) => {
   try {
     const { name, about } = req.body;
-    const userId = req.user._id;
+    const userId = req.users._id;
     const user = await User.findByIdAndUpdate(
       userId,
       { name, about },
@@ -76,7 +76,7 @@ const updateProfile = async (req, res, next) => {
 const updateAvatar = async (req, res, next) => {
   try {
     const { avatar } = req.body;
-    const userId = req.user._id;
+    const userId = req.users._id;
     const user = await User.findByIdAndUpdate(
       userId,
       { avatar },
@@ -104,10 +104,14 @@ const login = async (req, res, next) => {
     }
     const token = jwt.sign(
       { _id: user._id },
-      'secret-key',
+      'SECRET',
       { expiresIn: '7d' },
     );
-    res.cookie('jwt', token, { httpOnly: true });
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+    });
     return res.status(200).send(user.toJSON());
   } catch (err) {
     return next(new InternalServerError('Произошла ошибка на сервере'));
@@ -115,7 +119,7 @@ const login = async (req, res, next) => {
 };
 
 const getUserInfo = async (req, res, next) => {
-  const userId = req.user._id;
+  const userId = req.users._id;
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -123,6 +127,15 @@ const getUserInfo = async (req, res, next) => {
     }
     return res.status(200).send(user);
   } catch (err) {
+    return next(new InternalServerError('Произошла ошибка на сервере'));
+  }
+};
+
+const logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt');
+    return res.status(200).send({ message: 'Выход' });
+  } catch (error) {
     return next(new InternalServerError('Произошла ошибка на сервере'));
   }
 };
@@ -135,4 +148,5 @@ module.exports = {
   updateAvatar,
   login,
   getUserInfo,
+  logout,
 };

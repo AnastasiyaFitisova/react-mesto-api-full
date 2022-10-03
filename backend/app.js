@@ -18,13 +18,15 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 4000 } = process.env;
 
 const app = express();
-app.use(cookieParser());
-app.use(express.json());
 
 app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true,
 }));
+
+app.use(cookieParser());
+
+app.use(express.json());
 
 app.use(requestLogger);
 
@@ -33,13 +35,6 @@ app.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
-
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -50,6 +45,13 @@ app.post('/signup', celebrate({
     password: Joi.string().required(),
   }),
 }), createUser);
+
+app.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+}), login);
 
 app.use(auth);
 
