@@ -134,8 +134,8 @@ const getUserInfo = async (req, res, next) => {
 const logout = (req, res, next) => {
   try {
     res.clearCookie('jwt');
-    return res.status(200).send({ message: 'Выход' });
-  } catch (error) {
+    return res.status(200).send({ message: 'Выполнен выход' });
+  } catch (err) {
     return next(new InternalServerError('Произошла ошибка на сервере'));
   }
 };

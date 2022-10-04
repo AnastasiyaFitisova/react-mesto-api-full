@@ -2,12 +2,10 @@ const express = require('express');
 const { celebrate, Joi } = require('celebrate');
 
 const {
-  getUsers, getUserById, updateProfile, updateAvatar, getUserInfo, logout,
+  getUsers, getUserById, updateProfile, updateAvatar, getUserInfo,
 } = require('../controllers/users');
 
 const userRoutes = express.Router();
-
-userRoutes.get('/logout', express.json(), logout);
 
 userRoutes.get('/', getUsers); // возвращает всех пользователей
 

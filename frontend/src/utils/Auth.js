@@ -42,7 +42,7 @@ export const logout = () => {
     headers,
     credentials: 'include',
   })
-    .then((res) => {
-      return checkResult(res);
-    });
+  .then((res) => {
+    return checkResult(res);
+  });
 };

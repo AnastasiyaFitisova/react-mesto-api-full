@@ -7,21 +7,21 @@ class Api {
     }
   }
 
-    _checkResult(res) {
-      if(res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject('Возникла ошибка');
-      }; 
+  _checkResult(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject('Возникла ошибка');
     };
-  
+  };
+
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
       credentials: 'include',
       headers: this._headers,
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   addCard(inputName, inputLink) {
@@ -36,7 +36,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   getUserInfo() {
@@ -45,7 +45,7 @@ class Api {
       credentials: 'include',
       headers: this._headers
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   correctUserInfo(userName, userPosition) {
@@ -60,7 +60,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   deleteCard(cardId) {
@@ -69,16 +69,16 @@ class Api {
       credentials: 'include',
       headers: this._headers
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   changeLikeCardStatus(cardId, likeStatus) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: (likeStatus ? "PUT": "DELETE"),
+      method: (likeStatus ? "PUT" : "DELETE"),
       credentials: 'include',
       headers: this._headers
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
   changeUserAvatar(userAvatar) {
@@ -92,11 +92,11 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(body)
     })
-    .then(this._checkResult);
+      .then(this._checkResult);
   };
 
 };
 
-const api = new Api ('http://localhost:4000');
+const api = new Api('http://localhost:4000');
 
 export default api;

@@ -15,6 +15,10 @@ const BadRequest = require('./errors/BadRequest');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const {
+  logout,
+} = require('./controllers/users');
+
 const { PORT = 4000 } = process.env;
 
 const app = express();
@@ -52,6 +56,8 @@ app.post('/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
+
+app.get('/logout', logout);
 
 app.use(auth);
 
