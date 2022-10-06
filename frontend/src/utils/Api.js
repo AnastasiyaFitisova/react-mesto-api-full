@@ -97,6 +97,6 @@ class Api {
 
 };
 
-const api = new Api('https://anastasiyafitisova.nomoredomains.icu/');
+const api = new Api('https://anastasiyafitisova.nomoredomains.icu');
 
 export default api;

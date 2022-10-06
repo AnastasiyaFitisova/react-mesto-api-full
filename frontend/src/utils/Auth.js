@@ -1,4 +1,4 @@
-export const url = "https://anastasiyafitisova.nomoredomains.icu/";
+export const url = "https://anastasiyafitisova.nomoredomains.icu";
 
 const checkResult = (res) => {
   if (res.ok) {
