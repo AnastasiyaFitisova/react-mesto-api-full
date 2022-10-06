@@ -24,7 +24,7 @@ const { PORT = 4000 } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: ['https://frontanastasiyafitisova.nomoredomains.icu/sign-in', 'http://frontanastasiyafitisova.nomoredomains.icu/sign-in'],
+  origin: ['https://frontanastasiyafitisova.nomoredomains.icu', 'http://frontanastasiyafitisova.nomoredomains.icu'],
   credentials: true,
 }));
 
