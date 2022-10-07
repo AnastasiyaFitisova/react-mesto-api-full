@@ -165,7 +165,7 @@ function App() {
       .then(() => {
         setIsSuccess(true);
         setIsTooltipPopupOpen(true);
-        history.go("/sign-in");
+        history.push("/sign-in");
       })
       .catch((err) => {
         console.log(err);
