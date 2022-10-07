@@ -150,7 +150,7 @@ function App() {
         if ({ token }) {
           setLoggedIn(true);
           setEmail(data.email);
-          history.push("/");
+          history.go("/");
         }
       })
       .catch((err) => {
@@ -165,7 +165,7 @@ function App() {
       .then(() => {
         setIsSuccess(true);
         setIsTooltipPopupOpen(true);
-        history.push("/sign-in");
+        history.go("/sign-in");
       })
       .catch((err) => {
         console.log(err);
