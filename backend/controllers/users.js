@@ -9,8 +9,6 @@ const InternalServerError = require('../errors/InternalServerError');
 const Unauthorized = require('../errors/Unauthorized');
 const Conflict = require('../errors/Conflict');
 
-const { NODE_ENV, JWT_SECRET } = process.env;
-
 const createUser = async (req, res, next) => {
   try {
     const {
@@ -106,7 +104,7 @@ const login = async (req, res, next) => {
     }
     const token = jwt.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'SECRET',
+      'SECRET',
       { expiresIn: '7d' },
     );
     res.cookie('jwt', token, {
